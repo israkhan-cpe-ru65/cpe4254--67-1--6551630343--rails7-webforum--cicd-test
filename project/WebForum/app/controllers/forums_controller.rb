@@ -26,6 +26,11 @@ class ForumsController < ApplicationController
         end
     end
 
+    def destroy
+        @forum.destroy
+        redirect_to root_path
+    end
+
     private
 
     def forum_params
