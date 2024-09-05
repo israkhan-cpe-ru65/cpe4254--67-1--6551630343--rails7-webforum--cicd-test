@@ -18,6 +18,14 @@ class ForumsController < ApplicationController
         end
     end
 
+    def update
+        if @forum.update(forum_params)
+            redirect_to root_path
+        else
+            render 'edit'
+        end
+    end
+
     private
 
     def forum_params
