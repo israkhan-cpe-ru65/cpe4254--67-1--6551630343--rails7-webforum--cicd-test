@@ -21,7 +21,12 @@ class ForumsController < ApplicationController
     end
 
     private
+
     def forum_params
         params.require(:forum).permit(:thread, :content)
+    end
+
+    def forum_finding
+        @forum = Forum.find(params[:id])
     end
 end
