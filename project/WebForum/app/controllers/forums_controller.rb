@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-    before_action :forum_finding, only: [:show, :edit, :update]
+    before_action :forum_finding, only: [:show, :edit, :update, :destroy]
 
     def index
         @forums = Forum.all.order("created_at DESC")
