@@ -4,6 +4,7 @@ class ForumsController < ApplicationController
 
     def index
         @forums = Forum.all.order("created_at DESC")
+        @user = current_user
     end
 
     def new
