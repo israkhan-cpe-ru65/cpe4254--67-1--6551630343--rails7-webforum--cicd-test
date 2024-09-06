@@ -6,7 +6,7 @@ class ForumsController < ApplicationController
     end
 
     def new
-        @forum = Forum.new
+        @forum = current_user.forums.build
     end
 
     def create
