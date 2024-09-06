@@ -1,3 +1,9 @@
+<% if user_signed_in? %>
+    <% if @user.email.present? %>
+        <h2><%= @user.email %></h2>
+    <% end %>
+<% end %>
+          
 <% @forums.each do |forum| %>
     <h2><%= forum.thread %></h2>
     <%= link_to "View Forum Thread", forum_path(forum), class: "btn btn-default" %>
