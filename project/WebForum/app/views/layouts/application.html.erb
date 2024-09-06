@@ -32,6 +32,9 @@
             <li><%= link_to "Log In", new_user_session_path %></li>
           <% end %>
         </ul>
+        <% if user_signed_in? %>
+          <p><%= link_to "New Forum Thread", new_forum_path, class: "navbar-right navbar-text navbar-link" %></p>
+        <% end %>
       </div>
     </div>
 
