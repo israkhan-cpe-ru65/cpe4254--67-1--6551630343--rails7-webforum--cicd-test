@@ -1,1 +1,4 @@
 <p><%= comment.message %></p>
+<%= link_to "Edit", 
+    edit_forum_comment_path(comment.forum, comment) 
+%>
