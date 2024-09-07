@@ -17,4 +17,8 @@ class CommentsController < ApplicationController
     def comment_params
         params.require(:comment).permit(:message)
     end
+
+    def find_forum
+        @forum = Forum.find(params[:forum_id])
+    end
 end
