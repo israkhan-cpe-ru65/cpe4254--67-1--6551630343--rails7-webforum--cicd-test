@@ -17,6 +17,14 @@ class CommentsController < ApplicationController
     def edit
     end
 
+    def update
+        if @comment.update(comment_params)
+            redirect_to forum_path(@forum)
+        else
+            render 'edit'
+        end
+    end
+
     private
 
     def comment_params
