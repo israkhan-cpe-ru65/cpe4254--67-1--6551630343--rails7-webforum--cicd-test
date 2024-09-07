@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+    before_action :find_forum
     
     def create
         @forum = Forum.find(params[:forum_id])
