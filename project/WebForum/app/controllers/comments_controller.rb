@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
     before_action :find_forum
-    before_action :find_comment, only: [:edit]
+    before_action :find_comment, only: [:edit, :update]
     
     def create
         @forum = Forum.find(params[:forum_id])
