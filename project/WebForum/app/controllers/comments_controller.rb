@@ -25,6 +25,11 @@ class CommentsController < ApplicationController
         end
     end
 
+    def destroy
+        @comment.destroy
+        redirect_to forum_path(@forum)
+    end
+
     private
 
     def comment_params
