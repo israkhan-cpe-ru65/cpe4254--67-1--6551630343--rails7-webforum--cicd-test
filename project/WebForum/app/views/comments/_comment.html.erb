@@ -2,3 +2,11 @@
 <%= link_to "Edit", 
     edit_forum_comment_path(comment.forum, comment) 
 %>
+<%= link_to "Delete", 
+    forum_comment_path(comment.forum, comment),
+    method: :delete,
+    data: {
+        turbo_method: :delete,
+        turbo_confirm:  "Are you sure to delete this comment" 
+    }
+%>
