@@ -22,4 +22,8 @@ class CommentsController < ApplicationController
     def find_forum
         @forum = Forum.find(params[:forum_id])
     end
+
+    def find_comment
+        @comment = @forum.comments.find(params[:id])
+    end
 end
