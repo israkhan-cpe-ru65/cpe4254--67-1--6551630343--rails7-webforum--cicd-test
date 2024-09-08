@@ -1,23 +1,25 @@
-<p><%= comment.message %></p>
+<div class="comment">
+    <p><%= comment.message %></p>
 
-<p>
-    <b>Posted by</b>
-    <%= comment.user.email %>,
-    <%= time_ago_in_words(comment.created_at) %> ago
-</p>
+    <p>
+        <b>Posted by</b>
+        <%= comment.user.email %>,
+        <%= time_ago_in_words(comment.created_at) %> ago
+    </p>
 
-<% if user_signed_in? %>
-    <% if comment.user_id == current_user.id %>
-        <%= link_to "Edit", 
-            edit_forum_comment_path(comment.forum, comment) 
-        %>
-        <%= link_to "Delete", 
-            forum_comment_path(comment.forum, comment),
-            method: :delete,
-            data: {
-                turbo_method: :delete,
-                turbo_confirm:  "Are you sure to delete this comment" 
-            }
-        %>
+    <% if user_signed_in? %>
+        <% if comment.user_id == current_user.id %>
+            <%= link_to "Edit", 
+                edit_forum_comment_path(comment.forum, comment) 
+            %>
+            <%= link_to "Delete", 
+                forum_comment_path(comment.forum, comment),
+                method: :delete,
+                data: {
+                    turbo_method: :delete,
+                    turbo_confirm:  "Are you sure to delete this comment" 
+                }
+            %>
+        <% end %>
     <% end %>
-<% end %>
+</div>
