@@ -16,7 +16,8 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
-
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75,300..800;1,75,300..800&display=swap');
+ 
  .thread-button {
     background-color: white;
     color: blue;
@@ -45,7 +46,7 @@
 
     .thread-title {
         font-size: 1.5em;
-        font-family: 'Open Sans Condensed', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-weight: 300;
         margin-top: 0;
         color: white;
