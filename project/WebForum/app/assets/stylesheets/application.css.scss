@@ -42,4 +42,13 @@
     padding: 1.4em 1.4em;
     height: 150px;
     border-bottom: 4px solid #FF3333;
+
+    .thread-title {
+        font-size: 1.5em;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-weight: 300;
+        margin-top: 0;
+        color: white;
+        margin-bottom: 25px;
+    }
 }
