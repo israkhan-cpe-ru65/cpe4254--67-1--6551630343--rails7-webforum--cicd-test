@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: List Files
-        run: cd .. && ls -la
+        run:  ls -la
       - name: Check current directory
         run: pwd
 
