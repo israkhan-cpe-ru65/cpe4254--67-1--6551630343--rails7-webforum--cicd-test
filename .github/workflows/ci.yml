@@ -12,46 +12,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: List Files
-        run:  ls -la
+        run: ls -la
       - name: Check current directory
         run: pwd
 
   scan_ruby:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Change directory
-        run: cd project/WebForum
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-
       - name: Scan for common Rails security vulnerabilities using static analysis
+        working-directory: project/WebForum  # Specify the working directory
         run: bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Change directory
-        run: cd project/WebForum
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-
       - name: Scan for security vulnerabilities in JavaScript dependencies
+        working-directory: project/WebForum  # Specify the working directory
         run: bin/importmap audit
 
   lint:
@@ -59,37 +49,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Change directory
-        run: cd project/WebForum
-
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-
       - name: Lint code for consistent style
+        working-directory: project/WebForum  # Specify the working directory
         run: bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest
-
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips sqlite3
 
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Change directory
-        run: cd project/WebForum
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -98,9 +74,9 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
+        working-directory: project/WebForum  # Specify the working directory for the test commands
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
@@ -108,5 +84,5 @@ jobs:
         if: failure()
         with:
           name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
+          path: ${{ github.workspace }}/project/WebForum/tmp/screenshots
           if-no-files-found: ignore
