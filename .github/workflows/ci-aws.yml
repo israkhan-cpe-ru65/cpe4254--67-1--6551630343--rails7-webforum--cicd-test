@@ -71,11 +71,11 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          # passphrase: ${{ secrets.EC2_SSH_KEY_PASSPHRASE }}
+          passphrase: ${{ secrets.EC2_SSH_KEY_PASSPHRASE }}
           port: 22
           script: |
             aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
             docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
             docker stop rails-webforum/dev || true
             docker rm rails-webforum/dev || true
-            docker run -d --name webforum -p 3000:3000 -e RAILS_RELATIVE_URL_ROOT=${{ env.RAILS_RELATIVE_URL_ROOT }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
+            docker run -d --name webforum -p 3000:3000 -e RAILS_RELATIVE_URL_ROOT=${{ $RAILS_RELATIVE_URL_ROOT }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
