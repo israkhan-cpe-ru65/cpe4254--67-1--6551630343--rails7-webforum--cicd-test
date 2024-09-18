@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Move code
-        run: mv ./project/WebForum/* . && mv ./project/WebForum/.* .
+        run: rsync -av --remove-source-files project/WebForum/ .
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Move code
-        run: mv ./project/WebForum/* . && mv ./project/WebForum/.* .
+        run: rsync -av --remove-source-files project/WebForum/ .
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Move code
-        run: mv ./project/WebForum/* . && mv ./project/WebForum/.* .
+        run: rsync -av --remove-source-files project/WebForum/ .
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -64,7 +64,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Move code
-        run: mv ./project/WebForum/* . && mv ./project/WebForum/.* .
+        run: rsync -av --remove-source-files project/WebForum/ .
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -82,5 +82,5 @@ jobs:
         if: failure()
         with:
           name: screenshots
-          path: ${{ github.workspace }}/project/WebForum/tmp/screenshots
+          path: /tmp/screenshots
           if-no-files-found: ignore
