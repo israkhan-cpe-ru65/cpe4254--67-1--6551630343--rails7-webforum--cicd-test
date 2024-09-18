@@ -6,28 +6,19 @@ on:
     branches: [ release ]
 
 jobs:
-  check_dir:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: List Files
-        run: ls -la
-      - name: Check current directory
-        run: pwd
-
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Move code
+        run: mv ./project/WebForum/* ./project/WebForum/.* .
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
       - name: Scan for common Rails security vulnerabilities using static analysis
-        working-directory: project/WebForum  # Specify the working directory
         run: bin/brakeman --no-pager
 
   scan_js:
@@ -35,13 +26,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Move code
+        run: mv ./project/WebForum/* ./project/WebForum/.* .
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        working-directory: project/WebForum  # Specify the working directory
         run: bin/importmap audit
 
   lint:
@@ -49,13 +41,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Move code
+        run: mv ./project/WebForum/* ./project/WebForum/.* .
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
       - name: Lint code for consistent style
-        working-directory: project/WebForum  # Specify the working directory
         run: bin/rubocop -f github
 
   test:
@@ -67,6 +63,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Move code
+        run: mv ./project/WebForum/* ./project/WebForum/.* .
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -74,7 +73,6 @@ jobs:
           bundler-cache: true
 
       - name: Run tests
-        working-directory: project/WebForum  # Specify the working directory for the test commands
         env:
           RAILS_ENV: test
         run: bin/rails db:test:prepare test test:system
