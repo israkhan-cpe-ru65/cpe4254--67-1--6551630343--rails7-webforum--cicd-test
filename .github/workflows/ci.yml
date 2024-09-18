@@ -9,6 +9,8 @@ jobs:
   check_dir:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: List Files
         run: cd .. && ls -la
       - name: Check current directory
