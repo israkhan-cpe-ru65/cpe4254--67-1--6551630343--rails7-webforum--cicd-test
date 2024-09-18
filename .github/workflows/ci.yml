@@ -1,16 +1,23 @@
-name: CI
-
 defaults:
   run:
     shell: bash
     working-directory: ./project/WebForum
     
+name: CI
+
 on:
   pull_request:
   push:
     branches: [ release ]
 
 jobs:
+  check_dir:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check current directory
+        run: pwd
+
   scan_ruby:
     runs-on: ubuntu-latest
 
