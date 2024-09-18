@@ -11,7 +11,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.workspace	}}/project/WebForum
+        working-directory: $GITHUB_WORKSPACE/project/WebForum
     steps:
       - name: List Files
         run: ls -la
