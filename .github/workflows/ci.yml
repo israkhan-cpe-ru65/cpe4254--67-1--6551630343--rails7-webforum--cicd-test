@@ -1,7 +1,7 @@
 defaults:
   run:
     shell: bash
-    working-directory: $GITHUB_WORKSPACE/project/WebForum
+    working-directory: ${{env.working-directory}}/project/WebForum
     
 name: CI
 
