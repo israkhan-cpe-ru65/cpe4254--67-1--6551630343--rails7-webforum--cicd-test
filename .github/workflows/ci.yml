@@ -8,10 +8,6 @@ on:
 jobs:
   check_dir:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: $GITHUB_WORKSPACE/project/WebForum
     steps:
       - name: List Files
         run: ls -la
