@@ -1,5 +1,10 @@
 name: CI
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./project/WebForum
+    
 on:
   pull_request:
   push:
@@ -20,7 +25,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: project/WebForum/bin/brakeman --no-pager
+        run: bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
@@ -36,7 +41,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: project/WebForum/bin/importmap audit
+        run: bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
@@ -51,7 +56,7 @@ jobs:
           bundler-cache: true
 
       - name: Lint code for consistent style
-        run: project/WebForum/bin/rubocop -f github
+        run: bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest
@@ -79,7 +84,7 @@ jobs:
         env:
           RAILS_ENV: test
           # REDIS_URL: redis://localhost:6379/0
-        run: project/WebForum/bin/rails db:test:prepare test test:system
+        run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
