@@ -1,9 +1,12 @@
-name: CI
+name: Test
 
 on:
-  pull_request:
   push:
-    branches: [ release ]
+    branches:
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
+      - '!master'   # excludes master
 
 jobs:
   scan_ruby:
