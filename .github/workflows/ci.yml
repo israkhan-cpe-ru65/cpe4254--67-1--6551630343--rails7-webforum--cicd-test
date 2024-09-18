@@ -1,7 +1,7 @@
 defaults:
   run:
     shell: bash
-    working-directory: ./project/WebForum
+    working-directory: project/WebForum
     
 name: CI
 
