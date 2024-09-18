@@ -78,4 +78,4 @@ jobs:
             docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
             docker stop rails-webforum/dev || true
             docker rm rails-webforum/dev || true
-            docker run -d --name webforum -p 3000:3000 -e RAILS_RELATIVE_URL_ROOT=${{ $RAILS_RELATIVE_URL_ROOT }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
+            docker run -d --name webforum -p 3000:3000 -e RAILS_RELATIVE_URL_ROOT=$RAILS_RELATIVE_URL_ROOT ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rails-webforum/dev:latest
