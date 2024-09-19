@@ -20,19 +20,19 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ vars.EC2_SSH }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
 
       - name: Disable SSH host key checking (optional)
         run: |
-          echo "Host ${{ secrets.EC2_HOST }}" >> ~/.ssh/config
+          echo "Host ${{ vars.EC2_HOST }}" >> ~/.ssh/config
           echo "    StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Test SSH Connection
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} "uptime"
+          ssh -o StrictHostKeyChecking=no ec2-user@${{ vars.EC2_HOST }} "uptime"
           
   build:
     runs-on: ubuntu-latest
