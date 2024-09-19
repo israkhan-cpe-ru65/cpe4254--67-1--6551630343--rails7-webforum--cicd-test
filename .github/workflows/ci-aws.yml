@@ -67,7 +67,10 @@ jobs:
     steps:
       - name: Check
         run: echo "$CHECK"
-    
+
+      - name: Print all environment variables
+        run: printenv
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
