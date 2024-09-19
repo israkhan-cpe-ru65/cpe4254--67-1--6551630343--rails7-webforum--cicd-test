@@ -20,6 +20,8 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
+          sudo rm ~/.ssh/id_rsa
+          touch ~/.ssh/id_rsa
           echo "${{ vars.EC2_SSH }}" >> ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s)
